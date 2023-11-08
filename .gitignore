@@ -1,0 +1,67 @@
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### IntelliJ IDEA ###
+.idea/modules.xml
+.idea/jarRepositories.xml
+.idea/compiler.xml
+.idea/libraries/
+*.iws
+*.iml
+*.ipr
+
+### Eclipse ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
+.DS_Store
+/centralArea
+/noFlyZones
+/orders
+/restaurants
+/restaurants.geojson
+/2023-10-10
+/2023-11-11.json
+/test1.geojson
+/test1geojson
+/test3.geojson
+/test3geojson
+/deliveries-2023-10-10.json
+/flightpath-2023-10-10.geojson
+/flightpath2023-10-10.geojson
+/2023-11-11
+/drone-2023-10-10.geojson
+/fails.geojson
+/flightpath.geojson
+/flightpath-2023-10-10.json
+/halfpath1.geojson
+/halfpath2.geojson
+/halfpath3.geojson
+/halfpath4.geojson
+/rest1path.geojson
+/rest2path.geojson
+/rest3path.geojson
+/rest4path.geojson
+/libraries
+/shalfpath2.geojson
