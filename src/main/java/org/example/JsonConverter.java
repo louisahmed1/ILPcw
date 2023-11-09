@@ -134,7 +134,6 @@ public class JsonConverter {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputPath))) {
             // Start of JSON array
             writer.write("[");
-
             for (int i = 1; i < flightpath.size(); i++) {
                 Node parent = flightpath.get(i - 1);
                 Node current = flightpath.get(i);
@@ -147,6 +146,8 @@ public class JsonConverter {
                 record.put("angle", current.angle);
                 record.put("toLongitude", current.lng);
                 record.put("toLatitude", current.lat);
+
+
 
                 // Serialize the map to JSON
                 String json = mapper.writeValueAsString(record);

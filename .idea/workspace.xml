@@ -1,55 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AnalysisUIOptions">
-    <option name="SCOPE_TYPE" value="8" />
-    <option name="CUSTOM_SCOPE_NAME" value="Selected files &amp; directories" />
-  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2e65b7b3-2acc-48a8-853d-e1ff9c57c97e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/JsonConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Flightpath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Flightpath.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/LngLatHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/LngLatHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Node.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/PointInAreaHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/PointInAreaHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/FlightpathTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/FlightpathTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="3edb56f2-6e3b-4270-a94a-6ca8e7f54e65" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Record" />
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="alwaysUpdateSnapshots" value="true" />
-      </MavenGeneralSettings>
-    </option>
-  </component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 3
-}</component>
-  <component name="ProjectId" id="2WG4nu9ptjQaDbu2fo5YFoErqmV" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 0
+}]]></component>
+  <component name="ProjectId" id="2XuHQcG0ojHgNXwzxrhja6XlFXx" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -60,81 +27,20 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/louis/IdeaProjects/PizzaDronz/libraries/IlpDataObjects.jar",
-    "project.structure.last.edited": "Problems",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.org.example in PizzaDronz">
-    <configuration name="AppTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="PizzaDronz" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.example.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.example" />
-      <option name="MAIN_CLASS_NAME" value="org.example.AppTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="org.example in PizzaDronz" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="PizzaDronz" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.example.DownloadTest" />
-          <option name="ENABLED" value="true" />
-          <option name="INCLUDE" value="false" />
-        </pattern>
-        <pattern>
-          <option name="PATTERN" value="org.example.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.example" />
-      <option name="MAIN_CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <list>
-      <item itemvalue="JUnit.AppTest" />
-      <item itemvalue="JUnit.org.example in PizzaDronz" />
-    </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="JUnit.org.example in PizzaDronz" />
-        <item itemvalue="JUnit.AppTest" />
-      </list>
-    </recent_temporary>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="2e65b7b3-2acc-48a8-853d-e1ff9c57c97e" name="Changes" comment="" />
-      <created>1696345754700</created>
+      <changelist id="3edb56f2-6e3b-4270-a94a-6ca8e7f54e65" name="Changes" comment="" />
+      <created>1699472030986</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1696345754700</updated>
+      <updated>1699472030986</updated>
     </task>
     <servers />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
 </project>

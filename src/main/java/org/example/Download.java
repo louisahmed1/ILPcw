@@ -45,4 +45,11 @@ public class Download {
             System.err.format("Error loading file: %s from %s −> %s", filenameToLoad, finalUrl, e);
         }
     }
+
+    public static void downloadAll(String[] args) {
+        Download.main(new String[]{args[1], "restaurants"});
+        Download.main(new String[]{args[1], "centralArea"});
+        Download.main(new String[]{args[1], "noFlyZones"});
+        Download.main(new String[]{args[1] + "/orders/", args[0]});
+    }
 }

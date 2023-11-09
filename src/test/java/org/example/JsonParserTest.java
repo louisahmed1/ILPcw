@@ -37,7 +37,7 @@ public class JsonParserTest extends TestCase {
             Download.main(new String[]{"https://ilp-rest.azurewebsites.net/", "restaurants"});
         }
 
-        Restaurant[] restaurants = JsonParser.parseRestaurant(Files.readString(path));
+        Restaurant[] restaurants = JsonParser.parseRestaurant("restaurants");
 
         Assert.assertNotNull(restaurants);
         Assert.assertEquals(restaurants[0].name(), "Civerinos Slice");
@@ -50,7 +50,7 @@ public class JsonParserTest extends TestCase {
             Download.main(new String[]{"https://ilp-rest.azurewebsites.net/", "orders"});
         }
 
-        Order[] orders = JsonParser.parseOrders(Files.readString(path));
+        Order[] orders = JsonParser.parseOrders("orders");
 
         Assert.assertNotNull(orders);
         Assert.assertEquals(orders[0].getOrderNo(), "19514FE0");
@@ -64,7 +64,7 @@ public class JsonParserTest extends TestCase {
             Download.main(new String[]{"https://ilp-rest.azurewebsites.net/","centralArea"});
         }
 
-        NamedRegion centralArea = JsonParser.parseCentralArea(Files.readString(path));
+        NamedRegion centralArea = JsonParser.parseCentralArea("centralArea");
 
         Assert.assertNotNull(centralArea);
         Assert.assertEquals(centralArea.name(), SystemConstants.CENTRAL_REGION_NAME);
@@ -78,7 +78,7 @@ public class JsonParserTest extends TestCase {
             Download.main(new String[]{"https://ilp-rest.azurewebsites.net","noFlyZones"});
         }
 
-        NamedRegion[] namedRegions = JsonParser.parseNoFlyZones(Files.readString(path));
+        NamedRegion[] namedRegions = JsonParser.parseNoFlyZones("noFlyZones");
 
         Assert.assertNotNull(namedRegions);
         Assert.assertEquals(namedRegions[0].name(), "George Square Area");

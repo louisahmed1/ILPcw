@@ -58,7 +58,7 @@ public class Flightpath {
             Node current = openSet.poll();
             openSetLookup.remove(current);
 
-            if (lngLatHandler.isCloseTo(current.lngLat, end.lngLat)) {
+            if (lngLatHandler.distanceTo(current.lngLat, end.lngLat) < 0.00014999) {
                 List<Node> path = new ArrayList<>();
                 while (current != null) {
                     path.add(current);
@@ -93,14 +93,16 @@ public class Flightpath {
     }
 
     public static List<Node> getPath(NamedRegion[] noFlyZones, NamedRegion centralArea, LngLat restaurantPos, LngLat startPos, String orderNo) throws IOException {
-        LngLat enterCentralPoint = LngLatHandler.findNearestPointOnPerimeter(restaurantPos, centralArea);
+        //LngLat enterCentralPoint = LngLatHandler.findNearestPointOnPerimeter(restaurantPos, centralArea);
 
         List<Node> toRestaurantPath = findPath(startPos.lng(), startPos.lat(), restaurantPos.lng(), restaurantPos.lat(), noFlyZones, orderNo);
+        LngLat enterCentralPoint = LngLatHandler.findNearestPointOnPerimeter(toRestaurantPath.get(toRestaurantPath.size()-1).lngLat, centralArea);
         List<Node> path = new ArrayList<Node>(toRestaurantPath);
 
         if (!lngLatHandler.isInCentralArea(restaurantPos, centralArea)) {
             List<Node> enterCentralAreaPath = findPath(toRestaurantPath.get(toRestaurantPath.size() - 1).lng, toRestaurantPath.get(toRestaurantPath.size() - 1).lat, enterCentralPoint.lng(), enterCentralPoint.lat(), noFlyZones, orderNo);
             List<Node> centralReturnPath = findPath(enterCentralAreaPath.get(enterCentralAreaPath.size()-1).lng, enterCentralAreaPath.get(enterCentralAreaPath.size()-1).lat, -3.186874, 55.944494, noFlyZones, orderNo);
+            centralReturnPath.remove(0);
             path.addAll(enterCentralAreaPath);
             path.addAll(centralReturnPath);
         } else {
@@ -126,16 +128,22 @@ public class Flightpath {
         List<Node> fullPath = new ArrayList<Node>();
         LocalDate orderDate = dayOrders[0].getOrderDate();
         List<List<Node>> pathList = new ArrayList<>();
+        String orderNo = "";
+        LngLat startPos = new LngLat(-3.186874, 55.944494);
 
         for (Order order : dayOrders) {
-            String orderNo = order.getOrderNo();
+            orderNo = order.getOrderNo();
             if (order.getOrderStatus() == OrderStatus.VALID_BUT_NOT_DELIVERED) {
-                List<Node> orderPath = getPath(noFlyZones, centralArea, getOrderRestaurant(order, restaurants), new LngLat(-3.186874, 55.944494), orderNo);
+                List<Node> orderPath = getPath(noFlyZones, centralArea, getOrderRestaurant(order, restaurants), startPos, orderNo);
+                startPos = orderPath.get(orderPath.size() - 1).lngLat;
                 pathList.add(orderPath);
                 fullPath.addAll(orderPath);
                 order.setOrderStatus(OrderStatus.DELIVERED);
             }
         }
+        Node lastNode = new Node(fullPath.get(fullPath.size()-1).lngLat, 999, orderNo);
+        lastNode.parent = fullPath.get(fullPath.size()-1);
+        fullPath.add(lastNode);
 
         jsonConverter.convertNodesToGeoJson(fullPath, "drone-" + orderDate.toString());
         jsonConverter.convertFlightpathToJson(fullPath, "flightpath-" + orderDate);

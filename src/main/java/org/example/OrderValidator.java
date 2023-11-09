@@ -129,20 +129,11 @@ public class OrderValidator implements OrderValidation {
         return true;
     }
 
-    public static Order[] validateDailyOrders(LocalDate date, Restaurant[] restaurants) throws IOException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String dateString = date.format(formatter);
-
-        Path path = Paths.get(dateString);
-        if (!Files.exists(path)) {
-            Download.main(new String[]{"https://ilp-rest.azurewebsites.net/orders/", dateString});
-        }
-
-        ArrayList<Order> unvalidatedOrders = new ArrayList<Order>(List.of(JsonParser.parseOrders(Files.readString(path))));
+    public static Order[] validateDailyOrders(Order[] orders, Restaurant[] restaurants) throws IOException {
         ArrayList<Order> validatedOrders = new ArrayList<Order>();
 
         OrderValidator orderValidator = new OrderValidator();
-        for (Order order : unvalidatedOrders) {
+        for (Order order : orders) {
             Order validatedOrder = orderValidator.validateOrder(order, restaurants);
             validatedOrders.add(validatedOrder);
         }

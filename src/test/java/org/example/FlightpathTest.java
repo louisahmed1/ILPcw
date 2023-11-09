@@ -40,24 +40,26 @@ public class FlightpathTest extends TestCase {
         if (!Files.exists(path)) {
             Download.main(new String[]{"https://ilp-rest.azurewebsites.net/", "noFlyZones"});
         }
-        noFlyZones = JsonParser.parseNoFlyZones(Files.readString(path));
+        noFlyZones = JsonParser.parseNoFlyZones("noFlyZones");
 
         Path path2 = Paths.get("centralArea");
         if (!Files.exists(path2)) {
             Download.main(new String[]{"https://ilp-rest.azurewebsites.net/", "centralArea"});
         }
-        centralArea = JsonParser.parseCentralArea(Files.readString(path2));
+        centralArea = JsonParser.parseCentralArea("centralArea");
 
         Path path3 = Paths.get("restaurants");
         if (!Files.exists(path3)) {
             Download.main(new String[]{"https://ilp-rest.azurewebsites.net/", "restaurants"});
         }
-        restaurants = JsonParser.parseRestaurant(Files.readString(path3));
+        restaurants = JsonParser.parseRestaurant("restaurants");
+
+        Order[] orders2 = JsonParser.parseOrders("2023-10-15");
 
         LocalDate localDate = LocalDate.of(2023, 10, 10);
         LocalDate localDate1 = LocalDate.of(2023, 11, 11);
-        orders = OrderValidator.validateDailyOrders(localDate, restaurants);
-        Order[] orders1 = OrderValidator.validateDailyOrders(localDate1, restaurants);
+        orders = OrderValidator.validateDailyOrders(orders2, restaurants);
+        //Order[] orders1 = OrderValidator.validateDailyOrders(orders2, restaurants);
 
         //List<Node> flightpath1 = Flightpath.getPath(noFlyZones, centralArea, new LngLat(-3.2000614, 55.951675));
         //Flightpath.convertNodesToGeoJson(flightpath1, "test1");
@@ -151,7 +153,44 @@ public class FlightpathTest extends TestCase {
         }
     }
 
+    public void testPathAngles() {
+        double delta = 0.0001;
+        for (List<Node> subPath : pathsList) {
+            Assert.assertTrue(Math.abs(subPath.get(0).angle - 999.0) < delta);
+        }
+        //Assert.assertTrue(Math.abs(fullPath.get(fullPath.size()-1).angle - 999) < delta);
+        for (int i = 1; i < fullPath.size(); i++) {
+            //checks for a hover move
+            if (Math.abs(fullPath.get(i).angle - 999) < delta) {
+                Assert.assertFalse(Math.abs(fullPath.get(i).angle - fullPath.get(i-1).angle) < delta);
+                Assert.assertTrue(Math.abs(lngLatHandler.distanceTo(fullPath.get(i).lngLat, fullPath.get(i-1).lngLat)) < delta);
+                //checks that distance between hover move and previous move is 0
+                if (Math.abs(lngLatHandler.distanceTo(fullPath.get(i).lngLat , fullPath.get(i-1).lngLat)) > delta) {
+                    System.out.println(fullPath.get(i).lngLat);
+                    System.out.println(fullPath.get(i-1).lngLat);
+                }
 
+            }
+        }
+        for (List<Node> subPath : pathsList) {
+            //Hovers variable to check that each journey to-and-from a restaurant has two hovers (pickup and dropoff)
+            int hovers = 0;
+            Assert.assertTrue(Math.abs(subPath.get(0).angle - 999) < delta);
+            for (Node node : subPath) {
+                if (Math.abs(node.angle - 999) < delta) {
+                    hovers += 1;
+                }
+            }
+            Assert.assertEquals(2, hovers);
+        }
+    }
+
+    public void testSubPathEndPoints() {
+        for (List<Node> subPath : pathsList) {
+            System.out.println(lngLatHandler.distanceTo(subPath.get(subPath.size()-1).lngLat, tower));
+            Assert.assertTrue(lngLatHandler.isCloseTo(subPath.get(subPath.size()-1).lngLat, tower));
+        }
+    }
 
 
 }
