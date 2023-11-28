@@ -28,16 +28,11 @@ public class OrderValidatorTest extends TestCase {
     Pizza pizza2 = new Pizza("Margarita", 1000);
     Pizza pizza3 = new Pizza("Meat Lover", 1400);
     Pizza pizza4 = new Pizza("Vegan Delight", 1100);
-    Pizza pizza5 = new Pizza("Super Cheese", 1400);
-    Pizza pizza6 = new Pizza("All Shrooms", 900);
-    Pizza pizza7 = new Pizza("Proper Pizza", 1400);
-    Pizza pizza8 = new Pizza("Pineapple & Ham & Cheese", 900);
 
     CreditCardInformation cardValid = new CreditCardInformation("1234123412341234", "09/25", "123");
     CreditCardInformation cardInvalidCvv = new CreditCardInformation("4321432143214321", "04/26", "30");
     CreditCardInformation cardInvalidCardNumber = new CreditCardInformation("098709870987098", "03/25", "235");
     CreditCardInformation cardInvalidExpDate = new CreditCardInformation("3334333433343334", "01/10", "305");
-    CreditCardInformation getCardInvalidExpDate2 = new CreditCardInformation("5554555455545554", "01/10", "903");
 
     Restaurant restaurantCiverinos = new Restaurant("Civerinos Slice", new LngLat(-3.1912869215011597,55.945535152517735), new DayOfWeek[] { DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.FRIDAY, DayOfWeek.SATURDAY, DayOfWeek.SUNDAY}, new Pizza[]{pizza1, pizza2});
     Restaurant restaurantSoraLella = new Restaurant("Sora Lella Vegan Restaurant", new LngLat(-3.202541470527649, 55.943284737579376), new DayOfWeek[]{DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY, DayOfWeek.THURSDAY, DayOfWeek.FRIDAY}, new Pizza[]{pizza3, pizza4});
@@ -54,11 +49,11 @@ public class OrderValidatorTest extends TestCase {
         validOrder = new Order("123", LocalDate.of(2023,12,15), OrderStatus.UNDEFINED, OrderValidationCode.UNDEFINED, 2500, new Pizza[]{pizza1, pizza2}, cardValid);
         orderValidator = new OrderValidator();
         Path path = Paths.get("restaurants");
-        if (Files.exists(path)) {
-            restaurants = JsonParser.parseRestaurant("restaurants");
-        } else {
-            restaurants = new Restaurant[]{restaurantCiverinos, restaurantSoraLella};
-        }
+        //if (Files.exists(path)) {
+        //    restaurants = JsonParser.parseRestaurant("restaurants");
+        //} else {
+        restaurants = new Restaurant[]{restaurantCiverinos, restaurantSoraLella};
+        //}
 
     }
 

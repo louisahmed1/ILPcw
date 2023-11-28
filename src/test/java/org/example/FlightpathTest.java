@@ -5,6 +5,7 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import org.apache.commons.lang3.tuple.Pair;
+import uk.ac.ed.inf.ilp.constant.SystemConstants;
 import uk.ac.ed.inf.ilp.data.LngLat;
 import uk.ac.ed.inf.ilp.data.NamedRegion;
 import uk.ac.ed.inf.ilp.data.Order;
@@ -163,7 +164,7 @@ public class FlightpathTest extends TestCase {
             //checks for a hover move
             if (Math.abs(fullPath.get(i).angle - 999) < delta) {
                 Assert.assertFalse(Math.abs(fullPath.get(i).angle - fullPath.get(i-1).angle) < delta);
-                Assert.assertTrue(Math.abs(lngLatHandler.distanceTo(fullPath.get(i).lngLat, fullPath.get(i-1).lngLat)) < delta);
+                Assert.assertTrue(Math.abs(lngLatHandler.distanceTo(fullPath.get(i).lngLat, fullPath.get(i-1).lngLat)) < SystemConstants.DRONE_MOVE_DISTANCE);
                 //checks that distance between hover move and previous move is 0
                 if (Math.abs(lngLatHandler.distanceTo(fullPath.get(i).lngLat , fullPath.get(i-1).lngLat)) > delta) {
                     System.out.println(fullPath.get(i).lngLat);

@@ -12,6 +12,10 @@ import static org.example.PointInAreaHandler.isPointInsidePolygon;
  */
 public class LngLatHandler implements LngLatHandling {
 
+    public LngLatHandler() {
+
+    }
+
     /**
      * Calculate the straight-line distance between two geographical points.
      *

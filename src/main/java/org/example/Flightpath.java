@@ -10,6 +10,7 @@ import java.util.*;
 
 public class Flightpath {
 
+    public static final LngLat appleton = new LngLat(-3.186874, 55.944494);
     private static List<Node> getNeighbors(Node current, Node end, NamedRegion[] noFlyZones, String orderNo) {
         List<Node> neighbors = new ArrayList<>();
         LngLatHandler lngLatHandler = new LngLatHandler();
@@ -95,7 +96,7 @@ public class Flightpath {
     public static List<Node> getPath(NamedRegion[] noFlyZones, NamedRegion centralArea, LngLat restaurantPos, LngLat startPos, String orderNo) throws IOException {
         //LngLat enterCentralPoint = LngLatHandler.findNearestPointOnPerimeter(restaurantPos, centralArea);
 
-        List<Node> toRestaurantPath = findPath(startPos.lng(), startPos.lat(), restaurantPos.lng(), restaurantPos.lat(), noFlyZones, orderNo);
+        List<Node> toRestaurantPath = findPath(appleton.lng(), appleton.lat(), restaurantPos.lng(), restaurantPos.lat(), noFlyZones, orderNo);
         LngLat enterCentralPoint = LngLatHandler.findNearestPointOnPerimeter(toRestaurantPath.get(toRestaurantPath.size()-1).lngLat, centralArea);
         List<Node> path = new ArrayList<Node>(toRestaurantPath);
 

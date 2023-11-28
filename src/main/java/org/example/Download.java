@@ -5,11 +5,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.logging.Logger;
+
 /**
  * Simple download application to retrieve a file from the REST server
  **/
 
 public class Download {
+
+    private static final Logger logger = Logger.getLogger("Logger");
 
     /**
      *
@@ -42,7 +46,10 @@ public class Download {
             }
             System.out.println("File was written: " + filenameToLoad);
         } catch (IOException e) {
-            System.err.format("Error loading file: %s from %s −> %s", filenameToLoad, finalUrl, e);
+            String errorMessage = ("Error downloading file: " + finalUrl + " , provided URL has no endpoint '" + filenameToLoad + "'");
+            //System.err.println(errorMessage);
+            logger.severe(errorMessage);
+            System.exit(1);
         }
     }
 

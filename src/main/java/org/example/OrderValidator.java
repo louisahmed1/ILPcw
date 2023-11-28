@@ -24,6 +24,10 @@ import java.util.*;
  */
 public class OrderValidator implements OrderValidation {
 
+    public OrderValidator() {
+
+    }
+
     /**
      * Validates the provided order against a list of defined restaurants.
      *
