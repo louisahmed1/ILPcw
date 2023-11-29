@@ -1,12 +1,9 @@
 package org.example;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import uk.ac.ed.inf.ilp.constant.OrderStatus;
-import uk.ac.ed.inf.ilp.constant.OrderValidationCode;
 import uk.ac.ed.inf.ilp.data.LngLat;
 import uk.ac.ed.inf.ilp.data.Order;
 
@@ -21,9 +18,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class JsonConverter {
-    public static void convertNodesToGeoJson(List<Node> nodes, String fileName) throws IOException {
+
+    private static final Logger LOGGER = Logger.getLogger(JsonConverter.class.getName());
+
+    /**
+     * Converts a list of Nodes to a GeoJSON file.
+     * @param nodes The list of Node objects.
+     * @param fileName The name of the file to save.
+     * @throws IOException If an I/O error occurs.
+     */
+    public void convertNodesToGeoJson(List<Node> nodes, String fileName) throws IOException {
         Map<String, Object> geoJson = new HashMap<>();
         geoJson.put("type", "FeatureCollection");
 
@@ -53,42 +61,11 @@ public class JsonConverter {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
         objectMapper.writeValue(file, geoJson);
+        System.out.println("File was written: " + fileName + ".geojson");
     }
 
-    public static void writeGeoJson(List<LngLat> points, String filePath) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        ObjectNode geoJson = mapper.createObjectNode();
-
-        geoJson.put("type", "FeatureCollection");
-        ArrayNode features = mapper.createArrayNode();
-
-        for (LngLat point : points) {
-            ObjectNode feature = mapper.createObjectNode();
-            feature.put("type", "Feature");
-
-            ObjectNode geometry = mapper.createObjectNode();
-            geometry.put("type", "Point");
-            ArrayNode coordinates = mapper.createArrayNode();
-            coordinates.add(point.lng());
-            coordinates.add(point.lat());
-            geometry.set("coordinates", coordinates);
-
-            feature.set("geometry", geometry);
-            feature.set("properties", mapper.createObjectNode()); // Adding an empty properties object
-
-            features.add(feature);
-        }
-
-        geoJson.set("features", features);
-
-        // Write the geoJson to a file
-        mapper.writeValue(new File(filePath + ".geojson"), geoJson);
-    }
-
-    // Main method for testing
-    // ...
-
-    class OrderDTO {
+    // Nested class for Data Transfer Object
+    static class OrderDTO {
         private String orderNo;
         private String orderStatus;
         private String orderValidationCode;
@@ -102,14 +79,14 @@ public class JsonConverter {
         }
 
         public String getOrderNo() { return this.orderNo; }
-        public String getOrderStatus() { return this.orderStatus; }
-        public String getOrderValidationCode() { return this.orderValidationCode; }
-
-        public int getPriceTotalInPence() { return this.priceTotalInPence; }
-        // Getters and setters go here
     }
 
-    public void convertOrdersToJson(Order[] orders, LocalDate date) {
+    /**
+     * Converts orders to a JSON file.
+     * @param orders Array of Order objects.
+     * @param fileName The name of the deliveries file.
+     */
+    public void convertOrdersToJson(Order[] orders, String fileName) {
         ObjectMapper mapper = new ObjectMapper();
         try {
             OrderDTO[] orderDTOs = new OrderDTO[orders.length];
@@ -117,14 +94,19 @@ public class JsonConverter {
                 orderDTOs[i] = new OrderDTO(orders[i]);
             }
             String orderString = mapper.writeValueAsString(orderDTOs);
-            Files.write(Paths.get("deliveries-" + date.toString() + ".json"), orderString.getBytes());
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            Files.write(Paths.get(fileName + ".json"), orderString.getBytes());
+            System.out.println("File was written: " + fileName + ".json");
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            LOGGER.log(Level.SEVERE, e.toString(), e);
+            System.exit(1);
         }
     }
 
+    /**
+     * Converts a flight path to JSON format.
+     * @param flightpath List of Node objects representing the flight path.
+     * @param fileName The file name to save the JSON data.
+     */
     public void convertFlightpathToJson(List<Node> flightpath, String fileName) {
         // Initialize ObjectMapper
         ObjectMapper mapper = new ObjectMapper();
@@ -141,33 +123,26 @@ public class JsonConverter {
                 // Create a map to hold the attributes
                 Map<String, Object> record = new HashMap<>();
                 record.put("orderNo", current.orderNo);
-                record.put("fromLongitude", parent.lng);
-                record.put("fromLatitude", parent.lat);
+                record.put("fromLongitude", parent.lng());
+                record.put("fromLatitude", parent.lat());
                 record.put("angle", current.angle);
-                record.put("toLongitude", current.lng);
-                record.put("toLatitude", current.lat);
+                record.put("toLongitude", current.lng());
+                record.put("toLatitude", current.lat());
 
-
-
-                // Serialize the map to JSON
                 String json = mapper.writeValueAsString(record);
-
-                // Write the JSON string to the file
                 writer.write(json);
-
                 // If this is not the last item, add a comma
                 if (i < flightpath.size() - 1) {
                     writer.write(",");
                 }
-
-                // Add a newline for readability (optional)
+                //newline for readability
                 writer.newLine();
             }
-
-            // End of JSON array
             writer.write("]");
+            System.out.println("File was written: " + outputPath);
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, e.toString(), e);
+            System.exit(1);
         }
     }
 }

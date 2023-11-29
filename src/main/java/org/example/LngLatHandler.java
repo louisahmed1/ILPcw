@@ -5,6 +5,9 @@ import uk.ac.ed.inf.ilp.data.LngLat;
 import uk.ac.ed.inf.ilp.data.NamedRegion;
 import uk.ac.ed.inf.ilp.interfaces.LngLatHandling;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import static org.example.PointInAreaHandler.isPointInsidePolygon;
 
 /**
@@ -12,8 +15,10 @@ import static org.example.PointInAreaHandler.isPointInsidePolygon;
  */
 public class LngLatHandler implements LngLatHandling {
 
-    public LngLatHandler() {
+    private static final Logger LOGGER = Logger.getLogger(LngLatHandler.class.getName());
 
+    public LngLatHandler() {
+        // Default constructor for LngLatHandler
     }
 
     /**
@@ -30,6 +35,14 @@ public class LngLatHandler implements LngLatHandling {
         return Math.hypot(distanceLat, distanceLng);
     }
 
+    /**
+     * Find the closest point on a line segment to a given point.
+     *
+     * @param p Point to find the closest point for.
+     * @param a Start point of the line segment.
+     * @param b End point of the line segment.
+     * @return Closest point on the line segment to point p.
+     */
     private static LngLat closestPointOnSegment(LngLat p, LngLat a, LngLat b) {
         double ap_lng = p.lng() - a.lng();
         double ap_lat = p.lat() - a.lat();
@@ -48,6 +61,13 @@ public class LngLatHandler implements LngLatHandling {
         return new LngLat(a.lng() + ab_lng * t, a.lat() + ab_lat * t);
     }
 
+    /**
+     * Find the nearest point on the perimeter of a region to a given start point.
+     *
+     * @param startPoint Starting point for the search.
+     * @param area The region to search around.
+     * @return The nearest point on the perimeter of the region.
+     */
     public static LngLat findNearestPointOnPerimeter(LngLat startPoint, NamedRegion area) {
         LngLat nearestPoint = null;
         double minDistance = Double.MAX_VALUE;
@@ -76,7 +96,6 @@ public class LngLatHandler implements LngLatHandling {
      * @param otherPosition The second point.
      * @return true if the points are close, false otherwise.
      */
-
     public boolean isCloseTo(LngLat startPosition, LngLat otherPosition) {
         return distanceTo(startPosition, otherPosition) < SystemConstants.DRONE_IS_CLOSE_DISTANCE;
     }
@@ -99,14 +118,10 @@ public class LngLatHandler implements LngLatHandling {
      * @param angle         The direction in which the point should move, in degrees.
      *                      Must be a multiple of 22.5 degrees. An angle of 999 means no movement.
      * @return The new position after movement.
-     * @throws IllegalArgumentException If the angle is not a multiple of 22.5 degrees and not equal to 999.
-     * returns original position if angle is 999 (hovering angle)
      */
     public LngLat nextPosition(LngLat startPosition, double angle) throws IllegalArgumentException {
         if (angle == 999) {
             return startPosition;
-        } else if (angle % 22.5 != 0) {
-            throw new IllegalArgumentException("Angle must be a multiple of 22.5 degrees");
         }
 
         double sine = Math.sin(Math.toRadians(angle));

@@ -40,9 +40,6 @@
           <groupId>com.sample</groupId>
           <artifactId>sample</artifactId>
           <version>1.0</version>
-          <scope>system</scope>
-          <!-- Assuming that the 'libraries' folder is at the root of your Maven project -->
-          <systemPath>${project.basedir}/libraries/IlpDataObjects.jar</systemPath>
       </dependency>
   </dependencies>
     <build>
@@ -50,9 +47,47 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
                 <configuration>
                     <source>18</source>
                     <target>18</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version> <!-- use appropriate version -->
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>org.example.App</mainClass> <!-- Replace with your main class -->
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.5.1</version> <!-- Use the latest version available -->
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <!-- Optional configurations can be added here -->
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>3.1.1</version> <!-- Use the appropriate version -->
+                <configuration>
+                    <!-- your configuration here -->
                 </configuration>
             </plugin>
         </plugins>

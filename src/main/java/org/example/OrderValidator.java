@@ -9,23 +9,20 @@ import uk.ac.ed.inf.ilp.data.Pizza;
 import uk.ac.ed.inf.ilp.data.Restaurant;
 import uk.ac.ed.inf.ilp.interfaces.OrderValidation;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-
+import java.util.logging.Logger;
 
 /**
  * Validator for verifying the correctness of an order.
  */
 public class OrderValidator implements OrderValidation {
 
-    public OrderValidator() {
+    private static final Logger LOGGER = Logger.getLogger(OrderValidator.class.getName());
 
+    public OrderValidator() {
+        // Constructor for OrderValidator
     }
 
     /**
@@ -50,7 +47,6 @@ public class OrderValidator implements OrderValidation {
         if (!isValidCreditCard(order, order.getCreditCardInformation())) {
             return order;
         }
-
 
         // Check if ordered pizzas are available in defined restaurants
         for (Pizza orderedPizza : order.getPizzasInOrder()) {
@@ -133,8 +129,15 @@ public class OrderValidator implements OrderValidation {
         return true;
     }
 
-    public static Order[] validateDailyOrders(Order[] orders, Restaurant[] restaurants) throws IOException {
-        ArrayList<Order> validatedOrders = new ArrayList<Order>();
+    /**
+     * Validates a set of orders for a given day against defined restaurants.
+     *
+     * @param orders An array of orders to be validated.
+     * @param restaurants The defined restaurants to validate against.
+     * @return An array of validated orders.
+     */
+    public static Order[] validateDailyOrders(Order[] orders, Restaurant[] restaurants) {
+        ArrayList<Order> validatedOrders = new ArrayList<>();
 
         OrderValidator orderValidator = new OrderValidator();
         for (Order order : orders) {
@@ -142,6 +145,6 @@ public class OrderValidator implements OrderValidation {
             validatedOrders.add(validatedOrder);
         }
 
-        return(validatedOrders.toArray(new Order[0]));
+        return validatedOrders.toArray(new Order[0]);
     }
 }

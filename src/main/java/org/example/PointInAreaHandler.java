@@ -2,10 +2,14 @@ package org.example;
 
 import uk.ac.ed.inf.ilp.data.LngLat;
 
+import java.util.logging.Logger;
+
 /**
  * Handler class for determining if a point lies within a geographical area.
  */
 public class PointInAreaHandler {
+
+    private static final Logger LOGGER = Logger.getLogger(PointInAreaHandler.class.getName());
 
     /**
      * Check if point q lies on segment pr.
@@ -68,6 +72,15 @@ public class PointInAreaHandler {
         return result;
     }
 
+    /**
+     * Determine if two line segments intersect.
+     *
+     * @param p1 Start point of first line segment
+     * @param q1 End point of first line segment
+     * @param p2 Start point of second line segment
+     * @param q2 End point of second line segment
+     * @return true if the line segments intersect, false otherwise
+     */
     private static boolean doLinesIntersect(LngLat p1, LngLat q1, LngLat p2, LngLat q2) {
         // Find the four orientations needed for the general and special cases
         int o1 = orientation(p1, q1, p2);
@@ -93,6 +106,14 @@ public class PointInAreaHandler {
         return false; // Doesn't fall in any of the above cases
     }
 
+    /**
+     * Checks if a line formed by two points intersects with any edge of a polygon.
+     *
+     * @param point   The start point of the line.
+     * @param current The end point of the line.
+     * @param polygon An array representing the vertices of the polygon.
+     * @return true if the line intersects any edge of the polygon, false otherwise.
+     */
     public static boolean doesLineIntersectPolygon(LngLat point, LngLat current, LngLat[] polygon) {
         // Check if the line intersects with any of the edges of the polygon
         for (int i = 0; i < polygon.length; i++) {
@@ -104,6 +125,3 @@ public class PointInAreaHandler {
         return false;
     }
 }
-
-
-

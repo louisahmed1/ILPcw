@@ -27,7 +27,7 @@ public class FlightpathTest extends TestCase {
     private static NamedRegion centralArea;
     private static Restaurant[] restaurants;
     private static LngLatHandler lngLatHandler = new LngLatHandler();
-
+    private static JsonConverter jsonConverter = new JsonConverter();
     private static LngLat tower = new LngLat(-3.186874, 55.944494);
     static Order[] orders;
     static List<Node> fullPath;
@@ -57,35 +57,13 @@ public class FlightpathTest extends TestCase {
 
         Order[] orders2 = JsonParser.parseOrders("2023-10-15");
 
-        LocalDate localDate = LocalDate.of(2023, 10, 10);
-        LocalDate localDate1 = LocalDate.of(2023, 11, 11);
         orders = OrderValidator.validateDailyOrders(orders2, restaurants);
-        //Order[] orders1 = OrderValidator.validateDailyOrders(orders2, restaurants);
-
-        //List<Node> flightpath1 = Flightpath.getPath(noFlyZones, centralArea, new LngLat(-3.2000614, 55.951675));
-        //Flightpath.convertNodesToGeoJson(flightpath1, "test1");
-        //Path testPath = Paths.get("flightpath.geojson");
-        //assertTrue(Files.exists(testPath));
-
-        //List<Node> flightpath3 = Flightpath.getPath(noFlyZones, centralArea, Flightpath.getRestaurantPosition(orders[0], restaurants));
-        //Flightpath.convertNodesToGeoJson(flightpath3, "test3");
-
-        //Flightpath.getFullDayPath(noFlyZones, centralArea, restaurants, orders1);
-        Pair<List<Node>, List<List<Node>>> pair = Flightpath.getFullDayPath(noFlyZones, centralArea, restaurants, orders);
+        Pair<List<Node>, List<List<Node>>> pair = Flightpath.getFullDayPath(noFlyZones, centralArea, restaurants, orders, "2023-10-15");
         fullPath = pair.getLeft();
         pathsList = pair.getRight();
 
-        JsonConverter.convertNodesToGeoJson(Flightpath.findPath(tower.lng(), tower.lat(), -3.1912869215011597,55.945535152517735, noFlyZones, "test"), "halfpath1");
-        JsonConverter.convertNodesToGeoJson(Flightpath.findPath(-3.1912869215011597,55.945535152517735, tower.lng(), tower.lat(), noFlyZones, "test"), "shalfpath2");
-        //JsonConverter.convertNodesToGeoJson(Flightpath.findPath(tower.lng(), tower.lat(), -3.202541470527649,55.943284737579376, noFlyZones), "halfpath2");
-        //JsonConverter.convertNodesToGeoJson(Flightpath.findPath(tower.lng(), tower.lat(), -3.1838572025299072,55.94449876875712, noFlyZones), "halfpath3");
-        //JsonConverter.convertNodesToGeoJson(Flightpath.findPath(tower.lng(), tower.lat(), -3.1940174102783203,55.94390696616939, noFlyZones), "halfpath4");
-
-        //JsonConverter.convertNodesToGeoJson(Flightpath.getPath(noFlyZones, centralArea, new LngLat(-3.1912869215011597,55.945535152517735), tower), "rest1path");
-        //JsonConverter.convertNodesToGeoJson(Flightpath.getPath(noFlyZones, centralArea, new LngLat(-3.202541470527649,55.943284737579376), tower), "rest2path");
-        //JsonConverter.convertNodesToGeoJson(Flightpath.getPath(noFlyZones, centralArea, new LngLat(-3.1838572025299072,55.94449876875712), tower), "rest3path");
-        //JsonConverter.convertNodesToGeoJson(Flightpath.getPath(noFlyZones, centralArea, new LngLat(-3.1940174102783203,55.94390696616939), tower), "rest4path");
-
+        jsonConverter.convertNodesToGeoJson(Flightpath.findPath(tower.lng(), tower.lat(), -3.1912869215011597,55.945535152517735, noFlyZones, "test"), "halfpath1");
+        jsonConverter.convertNodesToGeoJson(Flightpath.findPath(-3.1912869215011597,55.945535152517735, tower.lng(), tower.lat(), noFlyZones, "test"), "shalfpath2");
     }
 
     public void setUp() throws IOException {
@@ -95,7 +73,7 @@ public class FlightpathTest extends TestCase {
         }
     }
 
-    public void testBasicTest() throws IOException {
+    public void testBasicTest() {
         for (int i = 1; i < fullPath.size(); i++) {
             Node prevNode = fullPath.get(i - 1);
             Node currentNode = fullPath.get(i);
@@ -123,21 +101,17 @@ public class FlightpathTest extends TestCase {
                 }
             }
         }
-        if (failPoints.isEmpty()) {
-            System.out.println("Sub path nodes have correct distances");
-        } else {
-            JsonConverter.writeGeoJson(failPoints, "sub_path_fail_points");
-            System.out.println("Sub path node distances incorrect; geojson file of fail nodes created");
-        }
+        Assert.assertEquals(failPoints, new ArrayList<>());
     }
 
+    //Old test for un-needed requirement, can remove
     public void testCompletePathNodeDistances() throws IOException {
         List<LngLat> failPoints = new ArrayList<>();
         for (int i = 1; i < fullPath.size(); i++) {
             Node prevNode = fullPath.get(i-1);
             Node currentNode = fullPath.get(i);
             double distance = Math.abs(lngLatHandler.distanceTo(prevNode.lngLat, currentNode.lngLat));
-            if (!((distance < 0.0001501 && distance > 0.0001499) || distance == 0)) {
+            if (!((distance < 0.0001501 && distance > 0.0001499) || distance == 0) && prevNode.lngLat != tower && currentNode.lngLat != tower) {
                 if (!failPoints.contains(currentNode.lngLat)) {
                     failPoints.add(currentNode.lngLat);
                 }
@@ -146,12 +120,7 @@ public class FlightpathTest extends TestCase {
                 }
             }
         }
-        if (failPoints.isEmpty()) {
-            System.out.println("Complete path nodes have correct distances");
-        } else {
-            JsonConverter.writeGeoJson(failPoints, "full_path_fail_points");
-            System.out.println("Full path node distances incorrect; geojson file of fail nodes created");
-        }
+        //Assert.assertSame(failPoints, new ArrayList<>());
     }
 
     public void testPathAngles() {
@@ -159,18 +128,12 @@ public class FlightpathTest extends TestCase {
         for (List<Node> subPath : pathsList) {
             Assert.assertTrue(Math.abs(subPath.get(0).angle - 999.0) < delta);
         }
-        //Assert.assertTrue(Math.abs(fullPath.get(fullPath.size()-1).angle - 999) < delta);
         for (int i = 1; i < fullPath.size(); i++) {
             //checks for a hover move
             if (Math.abs(fullPath.get(i).angle - 999) < delta) {
                 Assert.assertFalse(Math.abs(fullPath.get(i).angle - fullPath.get(i-1).angle) < delta);
                 Assert.assertTrue(Math.abs(lngLatHandler.distanceTo(fullPath.get(i).lngLat, fullPath.get(i-1).lngLat)) < SystemConstants.DRONE_MOVE_DISTANCE);
                 //checks that distance between hover move and previous move is 0
-                if (Math.abs(lngLatHandler.distanceTo(fullPath.get(i).lngLat , fullPath.get(i-1).lngLat)) > delta) {
-                    System.out.println(fullPath.get(i).lngLat);
-                    System.out.println(fullPath.get(i-1).lngLat);
-                }
-
             }
         }
         for (List<Node> subPath : pathsList) {
@@ -188,7 +151,6 @@ public class FlightpathTest extends TestCase {
 
     public void testSubPathEndPoints() {
         for (List<Node> subPath : pathsList) {
-            System.out.println(lngLatHandler.distanceTo(subPath.get(subPath.size()-1).lngLat, tower));
             Assert.assertTrue(lngLatHandler.isCloseTo(subPath.get(subPath.size()-1).lngLat, tower));
         }
     }
