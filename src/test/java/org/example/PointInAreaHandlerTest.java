@@ -16,7 +16,7 @@ public class PointInAreaHandlerTest extends TestCase {
 
     PointInAreaHandler pointInAreaHandler;
     @Override
-    protected void setUp() throws Exception {
+    protected void setUp() {
         pointInAreaHandler = new PointInAreaHandler();
     }
 

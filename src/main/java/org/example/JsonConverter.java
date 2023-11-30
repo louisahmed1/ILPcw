@@ -14,10 +14,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -69,16 +66,19 @@ public class JsonConverter {
         private String orderNo;
         private String orderStatus;
         private String orderValidationCode;
-        private int priceTotalInPence;
+        private int costInPence;
 
         public OrderDTO(Order order) {
             this.orderNo = order.getOrderNo();
             this.orderStatus = String.valueOf(order.getOrderStatus());
             this.orderValidationCode = String.valueOf(order.getOrderValidationCode());
-            this.priceTotalInPence = order.getPriceTotalInPence();
+            this.costInPence = order.getPriceTotalInPence();
         }
 
         public String getOrderNo() { return this.orderNo; }
+        public String getOrderStatus() { return this.orderStatus; }
+        public String getOrderValidationCode() { return this.orderValidationCode; }
+        public int getCostInPence() { return this.costInPence; }
     }
 
     /**
@@ -103,7 +103,7 @@ public class JsonConverter {
     }
 
     /**
-     * Converts a flight path to JSON format.
+     * Converts a flight path to a JSON file.
      * @param flightpath List of Node objects representing the flight path.
      * @param fileName The file name to save the JSON data.
      */
@@ -122,7 +122,11 @@ public class JsonConverter {
 
                 // Create a map to hold the attributes
                 Map<String, Object> record = new HashMap<>();
-                record.put("orderNo", current.orderNo);
+                if (!Objects.equals(current.orderNo, parent.orderNo)) {
+                    record.put("orderNo", parent.orderNo);
+                } else {
+                    record.put("orderNo", current.orderNo);
+                }
                 record.put("fromLongitude", parent.lng());
                 record.put("fromLatitude", parent.lat());
                 record.put("angle", current.angle);

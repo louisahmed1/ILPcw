@@ -90,7 +90,7 @@ public class LngLatHandler implements LngLatHandling {
     }
 
     /**
-     * Determine if two geographical points are close to each other based on a predefined constant.
+     * Determine if two geographical points are close to each other.
      *
      * @param startPosition The first point.
      * @param otherPosition The second point.

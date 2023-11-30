@@ -25,7 +25,7 @@ public class JsonParser {
      * @return Array of Restaurant objects.
      * @throws IOException If file cannot be read.
      */
-    public static Restaurant[] parseRestaurant(String fileString) throws IOException {
+    public Restaurant[] parseRestaurant(String fileString) throws IOException {
         Path path = Paths.get(fileString);
         if (!Files.exists(path)) {
             System.out.println("Restaurant file does not exist");
@@ -41,7 +41,7 @@ public class JsonParser {
      * @return Array of Order objects.
      * @throws IOException If file cannot be read.
      */
-    public static Order[] parseOrders(String fileString) throws IOException {
+    public Order[] parseOrders(String fileString) throws IOException {
         Path path = Paths.get(fileString);
         if (!Files.exists(path)) {
             System.out.println("Order(s) file does not exist");
@@ -57,7 +57,7 @@ public class JsonParser {
      * @return NamedRegion object.
      * @throws IOException If file cannot be read.
      */
-    public static NamedRegion parseCentralArea(String fileString) throws IOException {
+    public NamedRegion parseCentralArea(String fileString) throws IOException {
         Path path = Paths.get(fileString);
         if (!Files.exists(path)) {
             System.out.println("Central Area file does not exist");
@@ -73,7 +73,7 @@ public class JsonParser {
      * @return Array of NamedRegion objects.
      * @throws IOException If file cannot be read.
      */
-    public static NamedRegion[] parseNoFlyZones(String fileString) throws IOException {
+    public NamedRegion[] parseNoFlyZones(String fileString) throws IOException {
         Path path = Paths.get(fileString);
         if (!Files.exists(path)) {
             System.out.println("No Fly Zones file does not exist");

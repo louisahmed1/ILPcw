@@ -5,7 +5,6 @@ import uk.ac.ed.inf.ilp.constant.OrderStatus;
 import uk.ac.ed.inf.ilp.constant.SystemConstants;
 import uk.ac.ed.inf.ilp.data.*;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -67,7 +66,7 @@ public class Flightpath {
      * @param restaurants Array of available restaurants.
      * @return Location of the restaurant.
      */
-    public static LngLat getOrderRestaurant(Order order, Restaurant[] restaurants) {
+    private static LngLat getOrderRestaurant(Order order, Restaurant[] restaurants) {
         for (Restaurant restaurant : restaurants) {
             if (Arrays.asList(restaurant.menu()).contains(order.getPizzasInOrder()[0])) {
                 return restaurant.location();
@@ -81,6 +80,7 @@ public class Flightpath {
 
     /**
      * Finds a path from start to end position avoiding no-fly zones.
+     * Used to find sub-paths.
      * @param startLng Longitude of start position.
      * @param startLat Latitude of start position.
      * @param endLng Longitude of end position.
@@ -89,7 +89,7 @@ public class Flightpath {
      * @param orderNo Order number for identification.
      * @return List of nodes forming the path.
      */
-    public static List<Node> findPath(double startLng, double startLat, double endLng, double endLat, NamedRegion[] noFlyZones, String orderNo) {
+    private static List<Node> findPath(double startLng, double startLat, double endLng, double endLat, NamedRegion[] noFlyZones, String orderNo) {
         //First and last nodes should hover (drop-off and collection respectively)
         Node start = new Node(new LngLat(startLng, startLat), 999, orderNo);
         Node end = new Node(new LngLat(endLng, endLat), 999, orderNo);
@@ -146,6 +146,7 @@ public class Flightpath {
 
     /**
      * Generates the path for an order from the starting point to the restaurant and back.
+     * Combines sub-paths from the `findPath` function
      * @param noFlyZones Array of no-fly zones.
      * @param centralArea Central area of operation.
      * @param restaurantPos Position of the restaurant.
@@ -153,7 +154,7 @@ public class Flightpath {
      * @return List of nodes forming the path.
      * @throws IOException If an I/O error occurs.
      */
-    public static List<Node> getOrderPath(NamedRegion[] noFlyZones, NamedRegion centralArea, LngLat restaurantPos, String orderNo) throws IOException {
+    private static List<Node> getOrderPath(NamedRegion[] noFlyZones, NamedRegion centralArea, LngLat restaurantPos, String orderNo) throws IOException {
         //Find path to restaurant
         List<Node> toRestaurantPath = findPath(APPLETON.lng(), APPLETON.lat(), restaurantPos.lng(), restaurantPos.lat(), noFlyZones, orderNo);
 
@@ -164,6 +165,7 @@ public class Flightpath {
 
         //Finds return path for restaurant outside of central area
         if (!lngLatHandler.isInRegion(restaurantPos, centralArea)) {
+
             //Find path from drop-off point to the closest point on an edge of central area
             List<Node> enterCentralAreaPath = findPath(toRestaurantPath.get(toRestaurantPath.size() - 1).lng(), toRestaurantPath.get(toRestaurantPath.size() - 1).lat(), enterCentralPoint.lng(), enterCentralPoint.lat(), noFlyZones, orderNo);
 

@@ -45,7 +45,7 @@ public class Download {
     }
 
     /**
-     * Downloads multiple files from the server based on the provided arguments.
+     * Downloads relevant files from the server for system operation.
      *
      * @param args Arguments used for specifying the server URL and the date for orders.
      */

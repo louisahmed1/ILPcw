@@ -13,7 +13,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Main application class for handling flightpath operations.
+ * Main application class for PizzaDronz system.
  */
 public class App {
 
@@ -28,11 +28,12 @@ public class App {
     public static void main(String[] args) throws IOException {
         checkArgs(args);
         Download.downloadAll(args);
+        JsonParser jsonParser = new JsonParser();
 
-        Restaurant[] restaurants = JsonParser.parseRestaurant("restaurants");
-        NamedRegion centralArea = JsonParser.parseCentralArea("centralArea");
-        NamedRegion[] noFlyZones = JsonParser.parseNoFlyZones("noFlyZones");
-        Order[] orders = JsonParser.parseOrders(args[0]);
+        Restaurant[] restaurants = jsonParser.parseRestaurant("restaurants");
+        NamedRegion centralArea = jsonParser.parseCentralArea("centralArea");
+        NamedRegion[] noFlyZones = jsonParser.parseNoFlyZones("noFlyZones");
+        Order[] orders = jsonParser.parseOrders(args[0]);
         Order[] validOrders = OrderValidator.validateDailyOrders(orders, restaurants);
 
         Flightpath.getFullDayPath(noFlyZones, centralArea, restaurants, validOrders, args[0]);

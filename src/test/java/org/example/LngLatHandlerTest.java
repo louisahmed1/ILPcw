@@ -68,12 +68,6 @@ public class LngLatHandlerTest extends TestCase {
         Assert.assertFalse(lngLatHandler.isInCentralArea(pointOutOfCentral, centralArea));
     }
 
-    /* Tests are all done in PointInAreaHandlerTest.java
-    @todo Integration tests
-    public void testInRegion() {
-
-    }
-     */
     public void testNextPosition() {
         LngLat startPos = new LngLat(-3.2, 56);
 

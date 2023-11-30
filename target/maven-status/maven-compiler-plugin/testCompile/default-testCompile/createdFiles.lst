@@ -1,0 +1,7 @@
+org\example\DownloadTest.class
+org\example\JsonParserTest.class
+org\example\LngLatHandlerTest.class
+org\example\AppTest.class
+org\example\OrderValidatorTest.class
+org\example\FlightpathTest.class
+org\example\PointInAreaHandlerTest.class

@@ -5,7 +5,7 @@ import uk.ac.ed.inf.ilp.data.LngLat;
 import java.util.Objects;
 
 /**
- * Represents a node in a graph, typically used for pathfinding algorithms.
+ * Represents a node for the pathfinding algorithm.
  */
 public class Node implements Comparable<Node> {
 

@@ -28,6 +28,7 @@ public class FlightpathTest extends TestCase {
     private static Restaurant[] restaurants;
     private static LngLatHandler lngLatHandler = new LngLatHandler();
     private static JsonConverter jsonConverter = new JsonConverter();
+    private static JsonParser jsonParser = new JsonParser();
     private static LngLat tower = new LngLat(-3.186874, 55.944494);
     static Order[] orders;
     static List<Node> fullPath;
@@ -41,29 +42,29 @@ public class FlightpathTest extends TestCase {
         if (!Files.exists(path)) {
             Download.main(new String[]{"https://ilp-rest.azurewebsites.net/", "noFlyZones"});
         }
-        noFlyZones = JsonParser.parseNoFlyZones("noFlyZones");
+        noFlyZones = jsonParser.parseNoFlyZones("noFlyZones");
 
         Path path2 = Paths.get("centralArea");
         if (!Files.exists(path2)) {
             Download.main(new String[]{"https://ilp-rest.azurewebsites.net/", "centralArea"});
         }
-        centralArea = JsonParser.parseCentralArea("centralArea");
+        centralArea = jsonParser.parseCentralArea("centralArea");
 
         Path path3 = Paths.get("restaurants");
         if (!Files.exists(path3)) {
             Download.main(new String[]{"https://ilp-rest.azurewebsites.net/", "restaurants"});
         }
-        restaurants = JsonParser.parseRestaurant("restaurants");
+        restaurants = jsonParser.parseRestaurant("restaurants");
 
-        Order[] orders2 = JsonParser.parseOrders("2023-10-15");
+        Order[] orders2 = jsonParser.parseOrders("2023-10-15");
 
         orders = OrderValidator.validateDailyOrders(orders2, restaurants);
         Pair<List<Node>, List<List<Node>>> pair = Flightpath.getFullDayPath(noFlyZones, centralArea, restaurants, orders, "2023-10-15");
         fullPath = pair.getLeft();
         pathsList = pair.getRight();
 
-        jsonConverter.convertNodesToGeoJson(Flightpath.findPath(tower.lng(), tower.lat(), -3.1912869215011597,55.945535152517735, noFlyZones, "test"), "halfpath1");
-        jsonConverter.convertNodesToGeoJson(Flightpath.findPath(-3.1912869215011597,55.945535152517735, tower.lng(), tower.lat(), noFlyZones, "test"), "shalfpath2");
+        //jsonConverter.convertNodesToGeoJson(Flightpath.findPath(tower.lng(), tower.lat(), -3.1912869215011597,55.945535152517735, noFlyZones, "test"), "halfpath1");
+        //jsonConverter.convertNodesToGeoJson(Flightpath.findPath(-3.1912869215011597,55.945535152517735, tower.lng(), tower.lat(), noFlyZones, "test"), "shalfpath2");
     }
 
     public void setUp() throws IOException {
@@ -84,7 +85,7 @@ public class FlightpathTest extends TestCase {
         }
     }
 
-    public void testEachPathNodeDistances() throws IOException {
+    public void testEachPathNodeDistances() {
         List<LngLat> failPoints = new ArrayList<>();
         for (List<Node> orderPath : pathsList) {
             for (int i = 1; i < orderPath.size(); i ++) {

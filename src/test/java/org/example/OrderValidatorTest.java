@@ -24,6 +24,7 @@ public class OrderValidatorTest extends TestCase {
 
     public static Test suite() { return new TestSuite( OrderValidatorTest.class); }
 
+    private static JsonParser jsonParser = new JsonParser();
     Pizza pizza1 = new Pizza("Calzone",1400);
     Pizza pizza2 = new Pizza("Margarita", 1000);
     Pizza pizza3 = new Pizza("Meat Lover", 1400);
@@ -182,22 +183,26 @@ public class OrderValidatorTest extends TestCase {
 
     public void validateAll() throws IOException {
         LocalDate date1 = LocalDate.of(2023, 10, 10);
-        this.dailyOrders = JsonParser.parseOrders(date1.toString());
+        this.dailyOrders = jsonParser.parseOrders(date1.toString());
     }
 
     public void testCardInfoDaily() throws IOException {
-        validateAll();
         //Invalid Card Number
-        // FIXME: 09/11/2023
-        //Assert.assertSame(dailyOrders[0].getOrderValidationCode(), OrderValidationCode.CARD_NUMBER_INVALID);
-        //Assert.assertSame(dailyOrders[0].getOrderStatus(), OrderStatus.INVALID);
+        validOrder.setCreditCardInformation(cardInvalidCardNumber);
+        Order orderValidated = orderValidator.validateOrder(validOrder, restaurants);
+        Assert.assertSame(orderValidated.getOrderValidationCode(), OrderValidationCode.CARD_NUMBER_INVALID);
+        Assert.assertSame(orderValidated.getOrderStatus(), OrderStatus.INVALID);
 
         //Invalid Cvv
-        //Assert.assertSame(dailyOrders[2].getOrderValidationCode(), OrderValidationCode.CVV_INVALID);
-        //Assert.assertSame(dailyOrders[2].getOrderStatus(), OrderStatus.INVALID);
+        validOrder.setCreditCardInformation(cardInvalidCvv);
+        Order orderValidated2 = orderValidator.validateOrder(validOrder, restaurants);
+        Assert.assertSame(orderValidated2.getOrderValidationCode(), OrderValidationCode.CVV_INVALID);
+        Assert.assertSame(orderValidated2.getOrderStatus(), OrderStatus.INVALID);
 
         //Invalid Expiry
-        //Assert.assertSame(dailyOrders[1].getOrderValidationCode(), OrderValidationCode.EXPIRY_DATE_INVALID);
-        //Assert.assertSame(dailyOrders[1].getOrderStatus(), OrderStatus.INVALID);
+        validOrder.setCreditCardInformation(cardInvalidExpDate);
+        Order orderValidated3 = orderValidator.validateOrder(validOrder, restaurants);
+        Assert.assertSame(orderValidated3.getOrderValidationCode(), OrderValidationCode.EXPIRY_DATE_INVALID);
+        Assert.assertSame(orderValidated3.getOrderStatus(), OrderStatus.INVALID);
     }
 }
