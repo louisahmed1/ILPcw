@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="GB"/>
     <property name="sun.boot.library.path" value="C:\Users\louis\Documents\jdk-18_windows-x64_bin\jdk-18\bin"/>
-    <property name="sun.java.command" value="C:\Users\louis\AppData\Local\Temp\surefire17534624062676550395\surefirebooter-20231130194020623_3.jar C:\Users\louis\AppData\Local\Temp\surefire17534624062676550395 2023-11-30T19-40-20_462-jvmRun1 surefire-20231130194020623_1tmp surefire_0-20231130194020623_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\louis\AppData\Local\Temp\surefire7819474644859712817\surefirebooter-20231130200756897_3.jar C:\Users\louis\AppData\Local\Temp\surefire7819474644859712817 2023-11-30T20-07-56_640-jvmRun1 surefire-20231130200756897_1tmp surefire_0-20231130200756897_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\louis\Documents\UNI\Informatics Large Practical\PizzaDronz\target\test-classes;C:\Users\louis\Documents\UNI\Informatics Large Practical\PizzaDronz\target\classes;C:\Users\louis\.m2\repository\junit\junit\3.8.1\junit-3.8.1.jar;C:\Users\louis\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.15.2\jackson-datatype-jsr310-2.15.2.jar;C:\Users\louis\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.15.2\jackson-annotations-2.15.2.jar;C:\Users\louis\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.15.2\jackson-core-2.15.2.jar;C:\Users\louis\.m2\repository\org\apache\commons\commons-lang3\3.12.0\commons-lang3-3.12.0.jar;C:\Users\louis\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.15.2\jackson-databind-2.15.2.jar;C:\Users\louis\.m2\repository\com\sample\sample\1.0\sample-1.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\louis\AppData\Local\Temp\surefire17534624062676550395\surefirebooter-20231130194020623_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\louis\AppData\Local\Temp\surefire7819474644859712817\surefirebooter-20231130200756897_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="18+36-2087"/>
@@ -56,11 +56,11 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="62.0"/>
   </properties>
-  <testcase name="testPoint5" classname="org.example.PointInAreaHandlerTest" time="0.0"/>
-  <testcase name="testPoint7" classname="org.example.PointInAreaHandlerTest" time="0.0"/>
-  <testcase name="testPoint3" classname="org.example.PointInAreaHandlerTest" time="0.0"/>
-  <testcase name="testPoint6" classname="org.example.PointInAreaHandlerTest" time="0.0"/>
-  <testcase name="testPoint2" classname="org.example.PointInAreaHandlerTest" time="0.0"/>
-  <testcase name="testPoint4" classname="org.example.PointInAreaHandlerTest" time="0.0"/>
   <testcase name="testPoint1" classname="org.example.PointInAreaHandlerTest" time="0.0"/>
+  <testcase name="testPoint4" classname="org.example.PointInAreaHandlerTest" time="0.0"/>
+  <testcase name="testPoint7" classname="org.example.PointInAreaHandlerTest" time="0.0"/>
+  <testcase name="testPoint6" classname="org.example.PointInAreaHandlerTest" time="0.0"/>
+  <testcase name="testPoint5" classname="org.example.PointInAreaHandlerTest" time="0.0"/>
+  <testcase name="testPoint3" classname="org.example.PointInAreaHandlerTest" time="0.0"/>
+  <testcase name="testPoint2" classname="org.example.PointInAreaHandlerTest" time="0.0"/>
 </testsuite>

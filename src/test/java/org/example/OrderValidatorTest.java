@@ -98,19 +98,6 @@ public class OrderValidatorTest extends TestCase {
 
     }
 
-    public void testCardExpDateExceptions() {
-        CreditCardInformation cvvWrong = new CreditCardInformation("1000100010001000", "2025-14-16", "123");
-        validOrder.setCreditCardInformation(cvvWrong);
-        try {
-            Order orderValidated = orderValidator.validateOrder(validOrder, restaurants);
-            fail("Expected parse exception");
-        } catch (DateTimeParseException e) {
-            //passes for this exception
-        } catch (Exception e) {
-            fail("Wrong exception thrown: " + e);
-        }
-    }
-
     public void testTotalIncorrect() {
         validOrder.setPriceTotalInPence(2499);
         Order orderValidated = orderValidator.validateOrder(validOrder, restaurants);

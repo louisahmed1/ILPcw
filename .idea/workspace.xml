@@ -4,7 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3edb56f2-6e3b-4270-a94a-6ca8e7f54e65" name="Changes" comment="" />
+    <list default="true" id="3edb56f2-6e3b-4270-a94a-6ca8e7f54e65" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Download.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Download.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/OrderValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/OrderValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/OrderValidatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/OrderValidatorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/PizzaDronz-1.0-SNAPSHOT-shaded.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/PizzaDronz-1.0-SNAPSHOT-shaded.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/PizzaDronz-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/PizzaDronz-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/Download.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/Download.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/org/example/OrderValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/org/example/OrderValidator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/original-PizzaDronz-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/original-PizzaDronz-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-org.example.AppTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-org.example.AppTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-org.example.DownloadTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-org.example.DownloadTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-org.example.FlightpathTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-org.example.FlightpathTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-org.example.JsonParserTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-org.example.JsonParserTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-org.example.LngLatHandlerTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-org.example.LngLatHandlerTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-org.example.OrderValidatorTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-org.example.OrderValidatorTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-org.example.PointInAreaHandlerTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-org.example.PointInAreaHandlerTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/org.example.DownloadTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/org.example.DownloadTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/org.example.FlightpathTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/org.example.FlightpathTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/org.example.JsonParserTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/org.example.JsonParserTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/org.example.LngLatHandlerTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/org.example.LngLatHandlerTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/org.example.OrderValidatorTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/org.example.OrderValidatorTest.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/org/example/OrderValidatorTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/org/example/OrderValidatorTest.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,9 +37,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 0
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2XuHQcG0ojHgNXwzxrhja6XlFXx" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -27,11 +51,24 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/louis/Documents/UNI/Informatics Large Practical/PizzaDronz/libraries/IlpDataObjects.jar",
     "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
+    "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="example in PizzaDronz" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+      <module name="PizzaDronz" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/src/test/java/org/example" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

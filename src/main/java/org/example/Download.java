@@ -39,7 +39,7 @@ public class Download {
                 System.out.println("File was downloaded: " + endpoint);
             }
         } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, "Error downloading file: " + baseUrl + endpoint + ". Check base URL argument (arg 0)");
+            LOGGER.log(Level.SEVERE, "Error downloading file: " + baseUrl + endpoint + ". Check arguments.");
             System.exit(1);
         }
     }

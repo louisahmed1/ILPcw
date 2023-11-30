@@ -112,12 +112,16 @@ public class OrderValidator implements OrderValidation {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");
 
         // Check if credit card is expired
-        if (LocalDate.parse("01/" + cardInfo.getCreditCardExpiry(), formatter).isBefore(LocalDate.now())) {
-            setInvalidOrder(order, OrderValidationCode.EXPIRY_DATE_INVALID);
+        try {
+            if (LocalDate.parse("01/" + cardInfo.getCreditCardExpiry(), formatter).isBefore(LocalDate.now())) {
+                setInvalidOrder(order, OrderValidationCode.EXPIRY_DATE_INVALID);
+                return false;
+            }
+        } catch (Exception e) {
             return false;
         }
         // Validate CVV format
-        else if (!cardInfo.getCvv().matches("^[0-9]{3}$")) {
+        if (!cardInfo.getCvv().matches("^[0-9]{3}$")) {
             setInvalidOrder(order, OrderValidationCode.CVV_INVALID);
             return false;
         }
